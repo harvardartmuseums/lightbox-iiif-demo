@@ -29,30 +29,30 @@ router.get('/lightbox', function(req, res, next) {
 				// Split the image across the screens
 				var imageSections = new Array(9);
 
+				// Scale by Height to fit the screen
+				var regionHeight = Math.round((imageInfo.height+44)/3);
+				var regionWidth = Math.ceil(regionHeight/0.5625);
+
 				console.log(imageInfo.width, imageInfo.height);
-
-				var regionHeight = Math.round((imageInfo.height-44)/3);
-				var regionWidth = Math.round(regionHeight/0.5625);
-
 				console.log(regionWidth, regionHeight);
 
-				var scaleFactor = (5804 - imageInfo.width)/3;
-				var scaleWidth = 1920 +  Math.round(scaleFactor);
+				// Request parameters: /position,region/scaling/rotation/format
+				// Example: /0,0,1920,1080/full/0/native.jpg
 
 				// Top row of screens
-				imageSections[0] = imageInfo['@id'] + '/0,0,1920,1080/full/0/native.jpg';
-				imageSections[1] = imageInfo['@id'] + '/1942,0,1920,1080/full/0/native.jpg';
-				imageSections[2] = '';
+				imageSections[0] = imageInfo['@id'] + '/0,0,' + regionWidth + ',' + regionHeight + '/,1080/0/native.jpg';
+				imageSections[1] = imageInfo['@id'] + '/' + (22+(regionWidth*1)) + ',0,' + regionWidth + ',' + regionHeight + '/,1080/0/native.jpg';
+				imageSections[2] = imageInfo['@id'] + '/' + (44+(regionWidth*2)) + ',0,' + regionWidth + ',' + regionHeight + '/,1080/0/native.jpg';
 
-				// Top row of screens
-				imageSections[3] = imageInfo['@id'] + '/0,1102,1920,1080/full/0/native.jpg';
-				imageSections[4] = imageInfo['@id'] + '/1942,1102,1920,1080/full/0/native.jpg';
-				imageSections[5] = '';
+				// Second row of screens
+				imageSections[3] = imageInfo['@id'] + '/0,' + (22+regionHeight) + ',' + regionWidth + ',' + regionHeight + '/,1080/0/native.jpg';
+				imageSections[4] = imageInfo['@id'] + '/' + (22+(regionWidth*1)) + ',' + (22+regionHeight) + ',' + regionWidth + ',' + regionHeight + '/,1080/0/native.jpg';
+				imageSections[5] = imageInfo['@id'] + '/' + (44+(regionWidth*2)) + ',' + (22+regionHeight) + ',' + regionWidth + ',' + regionHeight + '/,1080/0/native.jpg';
 
-				// Top row of screens
-				imageSections[6] = imageInfo['@id'] + '/0,2204,1920,1080/full/0/native.jpg';
-				imageSections[7] = imageInfo['@id'] + '/1942,2204,1920,1080/full/0/native.jpg';
-				imageSections[8] = '';
+				// Bottom row of screens
+				imageSections[6] = imageInfo['@id'] + '/0,' + (44+(regionHeight*2)) + ',' + regionWidth + ',' + regionHeight + '/1920,/0/native.jpg';
+				imageSections[7] = imageInfo['@id'] + '/' + (22+(regionWidth*1)) + ',' + (44+(regionHeight*2)) + ',' + regionWidth + ',' + regionHeight + '/1920,/0/native.jpg';
+				imageSections[8] = imageInfo['@id'] + '/' + (44+(regionWidth*2)) + ',' + (44+(regionHeight*2)) + ',' + regionWidth + ',' + regionHeight + '/1920,/0/native.jpg';
 
 				res.render('lightbox', 
 				{
