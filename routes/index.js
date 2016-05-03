@@ -42,17 +42,17 @@ router.get('/lightbox', function(req, res, next) {
 				// Top row of screens
 				imageSections[0] = imageInfo['@id'] + '/0,0,1920,1080/full/0/native.jpg';
 				imageSections[1] = imageInfo['@id'] + '/1942,0,1920,1080/full/0/native.jpg';
-				imageSections[2] = '';
+				imageSections[2] = imageInfo['@id'] + '/3884,0,1920,1080/full/0/native.jpg';
 
 				// Top row of screens
 				imageSections[3] = imageInfo['@id'] + '/0,1102,1920,1080/full/0/native.jpg';
 				imageSections[4] = imageInfo['@id'] + '/1942,1102,1920,1080/full/0/native.jpg';
-				imageSections[5] = '';
+				imageSections[5] = imageInfo['@id'] + '/3884,1102,1920,1080/full/0/native.jpg';
 
 				// Top row of screens
 				imageSections[6] = imageInfo['@id'] + '/0,2204,1920,1080/full/0/native.jpg';
-				imageSections[7] = imageInfo['@id'] + '/1942,2204,1920,1080/full/0/native.jpg';
-				imageSections[8] = '';
+				imageSections[7] = imageInfo['@id'] + '/1942,1102,1920,1080/full/0/native.jpg';
+				imageSections[8] = imageInfo['@id'] + '/3884,1102,1920,1080/full/0/native.jpg';
 
 				res.render('lightbox', 
 				{
