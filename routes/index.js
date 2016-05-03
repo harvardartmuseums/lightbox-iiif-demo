@@ -28,6 +28,7 @@ router.get('/lightbox', function(req, res, next) {
 
 				// Split the image across the screens
 				var imageSections = new Array(9);
+				var standardImageSections = new Array(9);
 
 				console.log(imageInfo.width, imageInfo.height);
 
@@ -44,15 +45,27 @@ router.get('/lightbox', function(req, res, next) {
 				imageSections[1] = imageInfo['@id'] + '/1942,0,1920,1080/full/0/native.jpg';
 				imageSections[2] = imageInfo['@id'] + '/3884,0,1920,1080/full/0/native.jpg';
 
+				standardImageSections[0] = imageInfo['@id'] + '/0,0,1920,1080/full/0/native.jpg';
+				standardImageSections[1] = imageInfo['@id'] + '/1920,0,1920,1080/full/0/native.jpg';
+				standardImageSections[2] = imageInfo['@id'] + '/3840,0,1920,1080/full/0/native.jpg';
+
 				// Top row of screens
 				imageSections[3] = imageInfo['@id'] + '/0,1102,1920,1080/full/0/native.jpg';
 				imageSections[4] = imageInfo['@id'] + '/1942,1102,1920,1080/full/0/native.jpg';
 				imageSections[5] = imageInfo['@id'] + '/3884,1102,1920,1080/full/0/native.jpg';
 
+				standardImageSections[3] = imageInfo['@id'] + '/0,1080,1920,1080/full/0/native.jpg';
+				standardImageSections[4] = imageInfo['@id'] + '/1920,1080,1920,1080/full/0/native.jpg';
+				standardImageSections[5] = imageInfo['@id'] + '/3840,1080,1920,1080/full/0/native.jpg';
+
 				// Top row of screens
 				imageSections[6] = imageInfo['@id'] + '/0,2204,1920,1080/full/0/native.jpg';
 				imageSections[7] = imageInfo['@id'] + '/1942,2204,1920,1080/full/0/native.jpg';
 				imageSections[8] = imageInfo['@id'] + '/3884,2204,1920,1080/full/0/native.jpg';
+
+				standardImageSections[6] = imageInfo['@id'] + '/0,2160,1920,1080/full/0/native.jpg';
+				standardImageSections[7] = imageInfo['@id'] + '/1920,2160,1920,1080/full/0/native.jpg';
+				standardImageSections[8] = imageInfo['@id'] + '/3840,2160,1920,1080/full/0/native.jpg';
 
 				res.render('lightbox', 
 				{
@@ -64,7 +77,16 @@ router.get('/lightbox', function(req, res, next) {
 				  image_part_6: imageSections[5],
 				  image_part_7: imageSections[6],
 				  image_part_8: imageSections[7],
-				  image_part_9: imageSections[8]
+				  image_part_9: imageSections[8],
+				  standard_image_part_1: standardImageSections[0],
+				  standard_image_part_2: standardImageSections[1],
+				  standard_image_part_3: standardImageSections[2],
+				  standard_image_part_4: standardImageSections[3],
+				  standard_image_part_5: standardImageSections[4],
+				  standard_image_part_6: standardImageSections[5],
+				  standard_image_part_7: standardImageSections[6],
+				  standard_image_part_8: standardImageSections[7],
+				  standard_image_part_9: standardImageSections[8]
 				});
 			});
 		} else {
