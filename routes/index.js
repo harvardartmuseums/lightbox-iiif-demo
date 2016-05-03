@@ -51,8 +51,8 @@ router.get('/lightbox', function(req, res, next) {
 
 				// Top row of screens
 				imageSections[6] = imageInfo['@id'] + '/0,2204,1920,1080/full/0/native.jpg';
-				imageSections[7] = imageInfo['@id'] + '/1942,1102,1920,1080/full/0/native.jpg';
-				imageSections[8] = imageInfo['@id'] + '/3884,1102,1920,1080/full/0/native.jpg';
+				imageSections[7] = imageInfo['@id'] + '/1942,2204,1920,1080/full/0/native.jpg';
+				imageSections[8] = imageInfo['@id'] + '/3884,2204,1920,1080/full/0/native.jpg';
 
 				res.render('lightbox', 
 				{
