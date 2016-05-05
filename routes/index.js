@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'IIIF Split Image Demo | Harvard Art Museums' });
 });
 
 // GET courtyard page
@@ -32,14 +32,21 @@ router.get('/courtyard/:screen_number', function(req, res, next) {
 				imagePart = imageInfo['@id'] + '/' + imageXOffset + ',0,1080,1920/full/0/native.jpg';
 
 				res.render('courtyard', {
+					title: 'Courtyard Signs | IIIF Split Image Demo | Harvard Art Museums',
 					image_part: imagePart
 				});
 			}); 
 		} else {
-			res.render('error', {message: 'Bad image'});
+			res.render('error', {
+				title: 'Error | Harvard Art Museums',
+				message: 'Bad image'
+			});
 		}
 	} else {
-		res.render('error', {message: 'Bad object ID'});
+		res.render('error', {
+			title: 'Error | Harvard Art Museums',
+			message: 'Bad object ID'
+		});
 	}
   });				
 });
@@ -106,6 +113,7 @@ router.get('/lightbox', function(req, res, next) {
 
 				res.render('lightbox', 
 				{
+				  title: 'Lightbox Video Wall | IIIF Split Image Demo | Harvard Art Museums',					
 				  image_part_1: imageSections[0],
 				  image_part_2: imageSections[1],
 				  image_part_3: imageSections[2],
@@ -127,10 +135,16 @@ router.get('/lightbox', function(req, res, next) {
 				});
 			});
 		} else {
-			res.render('error', {message: 'Bad image'});
+			res.render('error', {
+				title: 'Error | Harvard Art Museums',
+				message: 'Bad image'
+			});
 		}
 	} else {
-		res.render('error', {message: 'Bad object ID'});
+		res.render('error', {
+			title: 'Error | Harvard Art Museums',
+			message: 'Bad object ID'
+		});
 	}
   });
 });
