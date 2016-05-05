@@ -7,6 +7,43 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+// GET courtyard page
+router.get('/courtyard/:screen_number', function(req, res, next) {
+  var imagePart;
+  var bezelSize = 10;
+  var screenGapSize = 100;
+  var screenNumber = req.params.screen_number || 1;
+  var objectID = req.query.object || '330590';
+
+  // Get the object info
+  var objectURL = 'http://api.harvardartmuseums.org/object/' + objectID + '?apikey=2898df20-7867-11e5-8bd0-3f3d7a19b916';
+  request(objectURL, function(error, response, body) {
+  	var o = JSON.parse(body);
+  	
+  	if (!o.error) {
+		if (o.images.length > 0) {
+		  	// Get the image info
+		  	var imageInfoURL = o.images[0].iiifbaseuri + '/info.json';
+		    request(imageInfoURL, function(error, response, body) {
+				var imageInfo = JSON.parse(body);
+
+				var imageXOffset = (1080*(screenNumber-1)) + (bezelSize*(screenNumber-1)) + (screenGapSize*(screenNumber-1));
+
+				imagePart = imageInfo['@id'] + '/' + imageXOffset + ',0,1080,1920/full/0/native.jpg';
+
+				res.render('courtyard', {
+					image_part: imagePart
+				});
+			}); 
+		} else {
+			res.render('error', {message: 'Bad image'});
+		}
+	} else {
+		res.render('error', {message: 'Bad object ID'});
+	}
+  });				
+});
+
 // GET lightbox page
 router.get('/lightbox', function(req, res, next) {
   var objectID = req.query.object || '330590';
