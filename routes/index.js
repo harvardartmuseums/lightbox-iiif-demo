@@ -13,6 +13,8 @@ router.get('/', function(req, res, next) {
 router.get('/courtyard/:screen_number', function(req, res, next) {
   var imagePart;
   var bezelSize = 10;
+  var screenWidth = 1080;
+  var screenHeight = 1920;
   var screenGapSize = 100;
   var screenNumber = req.params.screen_number || 1;
   var objectID = req.query.object || '330590';
@@ -30,10 +32,10 @@ router.get('/courtyard/:screen_number', function(req, res, next) {
 				var imageInfo = JSON.parse(body);
 
 				// Calculate the chuck of the image to fetch
-				var imageXOffset = (1080*(screenNumber-1)) + (bezelSize*(screenNumber-1)) + (screenGapSize*(screenNumber-1));
+				var imageXOffset = (screenWidth+bezelSize+screenGapSize)*(screenNumber-1);
 
 				// Construct the URL for the image using the IIIF Image API syntax
-				imagePart = imageInfo['@id'] + '/' + imageXOffset + ',0,1080,1920/full/0/native.jpg';
+				imagePart = imageInfo['@id'] + '/' + imageXOffset + ',0,' + screenWidth + ',' + screenHeight + '/full/0/native.jpg';
 
 				res.render('courtyard', {
 					title: 'Courtyard Signs | IIIF Split Image Demo | Harvard Art Museums',
