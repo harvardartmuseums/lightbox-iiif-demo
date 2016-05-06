@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 var apikey = process.env.APIKEY;
+var defaultObjectID = 330590;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -17,7 +18,7 @@ router.get('/courtyard/:screen_number', function(req, res, next) {
   var screenHeight = 1920;
   var screenGapSize = 100;
   var screenNumber = req.params.screen_number || 1;
-  var objectID = req.query.object || '330590';
+  var objectID = req.query.object || defaultObjectID;
 
   // Get the object info
   var objectURL = 'http://api.harvardartmuseums.org/object/' + objectID + '?apikey=' + apikey;
@@ -59,7 +60,13 @@ router.get('/courtyard/:screen_number', function(req, res, next) {
 
 // GET lightbox page
 router.get('/lightbox', function(req, res, next) {
-  var objectID = req.query.object || '330590';
+  var objectID = req.query.object || defaultObjectID;
+
+  // Sreen info
+  var bezelSize = 11;
+  var screenWidth = 1920;
+  var screenHeight = 1080;
+  var screenCount = 9;
 
   // Get the object info
   var objectURL = 'http://api.harvardartmuseums.org/object/' + objectID + '?apikey=' + apikey;	
@@ -73,12 +80,9 @@ router.get('/lightbox', function(req, res, next) {
 		    request(imageInfoURL, function(error, response, body) {
 				var imageInfo = JSON.parse(body);
 
-				// Sreen info
-				var bezelSize = 11;
-
 				// Split the image across the screens
-				var imageSections = new Array(9);
-				var standardImageSections = new Array(9);
+				var imageSections = new Array(screenCount);
+				var standardImageSections = new Array(screenCount);
 
 				// Top row of screens
 				imageSections[0] = imageInfo['@id'] + '/0,0,1920,1080/full/0/native.jpg';
