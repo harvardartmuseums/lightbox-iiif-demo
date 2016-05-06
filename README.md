@@ -12,5 +12,5 @@ This demo uses the IIIF Image API to split large master image files across multi
 This application requires the following environment variables.  
 
 ```
-API_KEY = 000000-00000-00000-000000-000000
+APIKEY = 000000-00000-00000-000000-000000
 ```
