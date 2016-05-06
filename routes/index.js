@@ -2,6 +2,8 @@ var request = require('request');
 var express = require('express');
 var router = express.Router();
 
+var apikey = process.env.APIKEY;
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'IIIF Split Image Demo | Harvard Art Museums' });
@@ -16,7 +18,7 @@ router.get('/courtyard/:screen_number', function(req, res, next) {
   var objectID = req.query.object || '330590';
 
   // Get the object info
-  var objectURL = 'http://api.harvardartmuseums.org/object/' + objectID + '?apikey=2898df20-7867-11e5-8bd0-3f3d7a19b916';
+  var objectURL = 'http://api.harvardartmuseums.org/object/' + objectID + '?apikey=' + apikey;
   request(objectURL, function(error, response, body) {
   	var o = JSON.parse(body);
   	
@@ -56,7 +58,7 @@ router.get('/lightbox', function(req, res, next) {
   var objectID = req.query.object || '330590';
 
   // Get the object info
-  var objectURL = 'http://api.harvardartmuseums.org/object/' + objectID + '?apikey=2898df20-7867-11e5-8bd0-3f3d7a19b916';
+  var objectURL = 'http://api.harvardartmuseums.org/object/' + objectID + '?apikey=' + apikey;	
   request(objectURL, function(error, response, body) {
   	var o = JSON.parse(body);
   	
