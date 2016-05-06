@@ -14,3 +14,8 @@ This application requires the following environment variables.
 ```
 APIKEY = 000000-00000-00000-000000-000000
 ```
+
+### Start the server
+```
+npm start
+```
