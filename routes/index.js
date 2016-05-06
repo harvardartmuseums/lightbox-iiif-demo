@@ -29,8 +29,10 @@ router.get('/courtyard/:screen_number', function(req, res, next) {
 		    request(imageInfoURL, function(error, response, body) {
 				var imageInfo = JSON.parse(body);
 
+				// Calculate the chuck of the image to fetch
 				var imageXOffset = (1080*(screenNumber-1)) + (bezelSize*(screenNumber-1)) + (screenGapSize*(screenNumber-1));
 
+				// Construct the URL for the image using the IIIF Image API syntax
 				imagePart = imageInfo['@id'] + '/' + imageXOffset + ',0,1080,1920/full/0/native.jpg';
 
 				res.render('courtyard', {
@@ -75,16 +77,6 @@ router.get('/lightbox', function(req, res, next) {
 				// Split the image across the screens
 				var imageSections = new Array(9);
 				var standardImageSections = new Array(9);
-
-				console.log(imageInfo.width, imageInfo.height);
-
-				var regionHeight = Math.round((imageInfo.height-44)/3);
-				var regionWidth = Math.round(regionHeight/0.5625);
-
-				console.log(regionWidth, regionHeight);
-
-				var scaleFactor = (5804 - imageInfo.width)/3;
-				var scaleWidth = 1920 +  Math.round(scaleFactor);
 
 				// Top row of screens
 				imageSections[0] = imageInfo['@id'] + '/0,0,1920,1080/full/0/native.jpg';
