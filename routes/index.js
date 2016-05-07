@@ -21,8 +21,8 @@ router.get('/courtyard/:screen_number', function(req, res, next) {
   var objectID = req.query.object || defaultObjectID;
 
   // Get the object info
-  var objectURL = 'http://api.harvardartmuseums.org/object/' + objectID + '?apikey=' + apikey;
-  request(objectURL, function(error, response, body) {
+  var objectURL = 'http://api.harvardartmuseums.org/object/' + objectID;
+  request(objectURL, {qs: {apikey: apikey}}, function(error, response, body) {
   	var o = JSON.parse(body);
   	
   	if (!o.error) {
@@ -69,8 +69,8 @@ router.get('/lightbox', function(req, res, next) {
   var screenCount = 9;
 
   // Get the object info
-  var objectURL = 'http://api.harvardartmuseums.org/object/' + objectID + '?apikey=' + apikey;	
-  request(objectURL, function(error, response, body) {
+  var objectURL = 'http://api.harvardartmuseums.org/object/' + objectID;
+  request(objectURL, {qs: {apikey: apikey}}, function(error, response, body) {
   	var o = JSON.parse(body);
   	
   	if (!o.error) {
